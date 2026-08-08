@@ -1,14 +1,49 @@
-:root{
+@import "tailwindcss";
+
+:root {
   --font-heading: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
 }
 
-body{
-  font-family: var(--font-body);
-  background:#050505;
-  color:white;
+html {
+  scroll-behavior: smooth;
 }
 
-h1,h2,h3,h4,h5,h6{
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  background: #02050a;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
 }
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: white;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+

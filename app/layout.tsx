@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import {
+  Montserrat,
+  Barlow_Semi_Condensed,
+  Inter,
+} from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-heading",
+  weight: ["500", "600", "700"],
+});
+
+const barlow = Barlow_Semi_Condensed({
+  subsets: ["latin"],
+  variable: "--font-nav",
+  weight: ["400", "500", "600"],
 });
 
 const inter = Inter({
@@ -25,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
+        className={`${montserrat.variable} ${barlow.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>
