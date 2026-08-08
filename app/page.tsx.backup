@@ -1,0 +1,816 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar";
+
+function useCountUp(
+  target: number,
+  duration = 1800,
+  decimals = 0
+): number {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let startTime: number | null = null;
+    let frame = 0;
+
+    const animate = (time: number) => {
+      if (startTime === null) {
+        startTime = time;
+      }
+
+      const progress = Math.min(
+        (time - startTime) / duration,
+        1
+      );
+
+      const eased =
+        1 - Math.pow(1 - progress, 3);
+
+      setValue(target * eased);
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      }
+    };
+
+    frame = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [target, duration]);
+
+  if (decimals > 0) {
+    return Number(value.toFixed(decimals));
+  }
+
+  return Math.floor(value);
+}
+
+function formatNumber(value: number) {
+  return Math.floor(value).toLocaleString();
+}
+
+function StatNumber({
+  value,
+  suffix = "",
+}: {
+  value: number;
+  suffix?: string;
+}) {
+  const number = useCountUp(value, 1800);
+
+  return (
+    <>
+      {formatNumber(number)}
+      {suffix}
+    </>
+  );
+}
+
+export default function Home() {
+  const efficiency = useCountUp(85, 2200);
+  const revenue = useCountUp(128430, 2200);
+  const security = useCountUp(98, 2000);
+
+  return (
+    <main className="relative min-h-screen overflow-x-hidden bg-[#03050a] text-white">
+      {/* =====================================================
+          BACKGROUND
+      ====================================================== */}
+
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-[-15%] top-[10%] h-[500px] w-[500px] rounded-full bg-cyan-500/[0.08] blur-[140px]" />
+
+        <div className="absolute right-[-15%] top-[5%] h-[600px] w-[600px] rounded-full bg-blue-600/[0.08] blur-[150px]" />
+
+        <div className="absolute bottom-[-15%] left-[25%] h-[600px] w-[700px] rounded-full bg-violet-600/[0.07] blur-[160px]" />
+
+        <div
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage: `
+              linear-gradient(
+                rgba(255,255,255,0.055) 1px,
+                transparent 1px
+              ),
+              linear-gradient(
+                90deg,
+                rgba(255,255,255,0.055) 1px,
+                transparent 1px
+              )
+            `,
+            backgroundSize: "70px 70px",
+            maskImage:
+              "radial-gradient(circle at center, black 0%, transparent 78%)",
+            WebkitMaskImage:
+              "radial-gradient(circle at center, black 0%, transparent 78%)",
+          }}
+        />
+
+        <div className="absolute inset-x-0 top-0 h-[300px] bg-gradient-to-b from-cyan-500/[0.05] to-transparent" />
+      </div>
+
+      {/* =====================================================
+          NAVBAR
+      ====================================================== */}
+
+      <Navbar />
+
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+
+      <section className="relative z-10 mx-auto max-w-[1600px] px-5 pb-16 pt-20 sm:px-6 lg:px-12 lg:pb-24 lg:pt-28">
+        <div className="grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]">
+          {/* =================================================
+              LEFT SIDE
+          ================================================== */}
+
+          <div className="relative z-20">
+            {/* Badge */}
+
+            <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-cyan-400/30 bg-cyan-400/[0.04] px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-cyan-300 sm:px-5 sm:text-xs sm:tracking-[0.3em]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-70" />
+
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+              </span>
+
+              AI BUSINESS OPERATING SYSTEM
+            </div>
+
+            {/* Heading */}
+
+            <h1 className="max-w-[720px] text-[50px] font-black leading-[0.96] tracking-[-0.055em] sm:text-[70px] lg:text-[82px] xl:text-[92px]">
+              <span className="block text-white">
+                Scale Your
+              </span>
+
+              <span className="block text-white">
+                Business
+              </span>
+
+              <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-500 bg-clip-text text-transparent">
+                with AI.
+              </span>
+            </h1>
+
+            {/* Paragraph */}
+
+            <p className="mt-8 max-w-[690px] text-base leading-7 text-slate-400 sm:text-xl sm:leading-8">
+              AI automation, intelligent CRM,
+              cybersecurity, analytics, digital
+              growth and custom software —
+              engineered together inside one
+              powerful business platform.
+            </p>
+
+            {/* Buttons */}
+
+            <div className="mt-10 flex flex-wrap gap-4 sm:gap-5">
+              <button
+                type="button"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 px-7 py-4 text-sm font-bold text-white shadow-[0_15px_50px_rgba(0,180,255,0.22)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_70px_rgba(80,100,255,0.35)] sm:px-8 sm:text-base"
+              >
+                <span className="relative z-10">
+                  Explore Platform
+
+                  <span className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
+
+                <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-700 group-hover:translate-x-full" />
+              </button>
+
+              <button
+                type="button"
+                className="group rounded-2xl border border-white/10 bg-white/[0.02] px-7 py-4 text-sm font-bold text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/[0.05] sm:px-8 sm:text-base"
+              >
+                Book a Demo
+
+                <span className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  ↗
+                </span>
+              </button>
+            </div>
+
+            {/* Trusted */}
+
+            <div className="mt-12 flex items-center gap-5">
+              <div className="flex -space-x-2">
+                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-cyan-400 to-blue-500" />
+
+                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-violet-400 to-purple-600" />
+
+                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-blue-400 to-cyan-500" />
+
+                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-orange-400 to-pink-500" />
+              </div>
+
+              <span className="text-sm text-slate-500">
+                Trusted by businesses building with AI
+              </span>
+            </div>
+          </div>
+
+          {/* =================================================
+              RIGHT DASHBOARD
+          ================================================== */}
+
+          <div className="relative min-h-0 lg:min-h-[650px]">
+            {/* Main Dashboard */}
+
+            <div className="relative rounded-[28px] border border-white/[0.09] bg-[#080d16]/90 p-4 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:p-6 lg:absolute lg:inset-x-0 lg:top-4">
+              {/* Header */}
+
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-600 sm:text-xs">
+                    Business Intelligence
+                  </p>
+
+                  <h2 className="mt-2 text-xl font-bold sm:text-2xl">
+                    Overview
+                  </h2>
+                </div>
+
+                <div className="rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2 text-xs text-slate-400 sm:px-4 sm:text-sm">
+                  This Month
+                </div>
+              </div>
+
+              {/* Stats */}
+
+              <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+                {/* Clients */}
+
+                <div className="rounded-2xl border border-white/[0.07] bg-[#080d16] p-4 transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/20 sm:p-5">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-600 sm:text-xs">
+                    Clients
+                  </p>
+
+                  <p className="mt-3 text-xl font-bold sm:text-2xl">
+                    <StatNumber value={1245} />
+                  </p>
+
+                  <p className="mt-1 text-xs text-emerald-400">
+                    ↑ +8.2%
+                  </p>
+                </div>
+
+                {/* Automations */}
+
+                <div className="rounded-2xl border border-white/[0.07] bg-[#080d16] p-4 transition-all duration-500 hover:-translate-y-1 hover:border-violet-400/20 sm:p-5">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-600 sm:text-xs">
+                    AI Automations
+                  </p>
+
+                  <p className="mt-3 text-xl font-bold sm:text-2xl">
+                    <StatNumber value={86} />
+                  </p>
+
+                  <p className="mt-1 text-xs text-emerald-400">
+                    ↑ +15.3%
+                  </p>
+                </div>
+
+                {/* Security */}
+
+                <div className="rounded-2xl border border-white/[0.07] bg-[#080d16] p-4 transition-all duration-500 hover:-translate-y-1 hover:border-emerald-400/20 sm:p-5">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-600 sm:text-xs">
+                    Security
+                  </p>
+
+                  <p className="mt-3 text-xl font-bold sm:text-2xl">
+                    <StatNumber
+                      value={98}
+                      suffix="%"
+                    />
+                  </p>
+
+                  <p className="mt-1 text-xs text-emerald-400">
+                    ↑ Excellent
+                  </p>
+                </div>
+              </div>
+
+              {/* Charts */}
+
+              <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-[1.65fr_0.85fr]">
+                {/* Revenue */}
+
+                <div className="rounded-2xl border border-white/[0.07] bg-[#080d16] p-5 sm:p-6">
+                  <p className="text-xs uppercase tracking-wider text-slate-600">
+                    Revenue Overview
+                  </p>
+
+                  <p className="mt-2 text-2xl font-bold sm:text-3xl">
+                    $
+                    {formatNumber(revenue)}
+                  </p>
+
+                  <div className="relative mt-7 h-[160px] sm:h-[190px]">
+                    {/* Grid */}
+
+                    <div className="absolute inset-0 flex flex-col justify-between opacity-40">
+                      <div className="border-t border-white/10" />
+
+                      <div className="border-t border-white/10" />
+
+                      <div className="border-t border-white/10" />
+
+                      <div className="border-t border-white/10" />
+                    </div>
+
+                    {/* Chart */}
+
+                    <svg
+                      viewBox="0 0 500 190"
+                      className="relative h-full w-full overflow-visible"
+                      preserveAspectRatio="none"
+                    >
+                      <defs>
+                        <linearGradient
+                          id="lineGradient"
+                          x1="0%"
+                          x2="100%"
+                        >
+                          <stop
+                            offset="0%"
+                            stopColor="#22d3ee"
+                          />
+
+                          <stop
+                            offset="100%"
+                            stopColor="#8b5cf6"
+                          />
+                        </linearGradient>
+                      </defs>
+
+                      <path
+                        d="M0 150 C45 135 55 120 95 130 C130 142 145 100 180 112 C220 128 225 82 265 95 C300 110 315 65 350 78 C390 94 400 50 440 65 C465 73 480 50 500 45"
+                        fill="none"
+                        stroke="url(#lineGradient)"
+                        strokeWidth="5"
+                        strokeLinecap="round"
+                        pathLength="1"
+                        className="revenue-line"
+                      />
+
+                      <circle
+                        cx="500"
+                        cy="45"
+                        r="6"
+                        fill="#22d3ee"
+                        className="animate-pulse"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* 85% */}
+
+                <div className="rounded-2xl border border-white/[0.07] bg-[#080d16] p-5 sm:p-6">
+                  <p className="text-xs uppercase tracking-wider text-slate-600">
+                    AI Efficiency
+                  </p>
+
+                  <div className="mt-6 flex justify-center">
+                    <div className="relative h-36 w-36 sm:h-40 sm:w-40">
+                      {/* Glow */}
+
+                      <div className="efficiency-glow absolute inset-[-10px] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 opacity-35 blur-xl" />
+
+                      {/* Animated ring */}
+
+                      <div className="absolute inset-0 animate-ring rounded-full bg-[conic-gradient(from_0deg,#22d3ee_0deg,#3b82f6_180deg,#8b5cf6_306deg,#111827_306deg,#111827_360deg)] p-[9px]">
+                        <div className="flex h-full w-full items-center justify-center rounded-full bg-[#080d16]">
+                          <div className="text-center">
+                            <div className="text-3xl font-black sm:text-4xl">
+                              {formatNumber(efficiency)}%
+                            </div>
+
+                            <div className="mt-1 text-[10px] uppercase tracking-wider text-slate-600">
+                              Efficiency
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Efficiency details */}
+
+                  <div className="mt-6 space-y-3 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">
+                        AI Assistant
+                      </span>
+
+                      <span className="text-slate-400">
+                        42%
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">
+                        Automation
+                      </span>
+
+                      <span className="text-slate-400">
+                        28%
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">
+                        Analytics
+                      </span>
+
+                      <span className="text-slate-400">
+                        18%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Automation */}
+
+              <div className="mt-4 flex items-center gap-3 rounded-2xl border border-cyan-400/10 bg-cyan-400/[0.025] p-4 sm:gap-4">
+                <div className="flex h-11 w-11 shrink-0 animate-pulse items-center justify-center rounded-2xl bg-cyan-400/10 text-xl sm:h-12 sm:w-12">
+                  ⚡
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold">
+                    AI Automation Running
+                  </p>
+
+                  <p className="text-xs text-slate-600 sm:text-sm">
+                    Processing business workflows
+                  </p>
+
+                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/5">
+                    <div className="h-full w-[72%] animate-progress rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" />
+                  </div>
+                </div>
+
+                <div className="shrink-0 text-[10px] text-emerald-400 sm:text-xs">
+                  ACTIVE
+                </div>
+              </div>
+            </div>
+
+            {/* =================================================
+                FLOATING AI CARD
+            ================================================== */}
+
+            <div className="absolute -left-10 top-20 z-20 hidden w-[285px] animate-float rounded-3xl border border-cyan-400/20 bg-[#080d16]/95 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] backdrop-blur-2xl lg:block">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-[0.2em] text-slate-600">
+                  AI Status
+                </span>
+
+                <span className="flex items-center gap-2 text-xs text-emerald-400">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                  Online
+                </span>
+              </div>
+
+              <p className="mt-5 text-xl font-bold">
+                Intelligent
+              </p>
+
+              <p className="mt-1 text-sm text-slate-600">
+                24 AI Agents active
+              </p>
+            </div>
+
+            {/* =================================================
+                FLOATING SECURITY CARD
+            ================================================== */}
+
+            <div className="absolute -bottom-5 right-[-20px] z-20 hidden w-[300px] animate-float-delayed rounded-3xl border border-violet-400/20 bg-[#080d16]/95 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] backdrop-blur-2xl lg:block">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-[0.2em] text-slate-600">
+                  Security
+                </span>
+
+                <span className="text-violet-400">
+                  ◇
+                </span>
+              </div>
+
+              <p className="mt-4 text-4xl font-black">
+                {formatNumber(security)}%
+              </p>
+
+              <p className="mt-1 text-sm text-emerald-400">
+                Protected & monitored
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          BOTTOM FEATURE CARDS
+      ====================================================== */}
+
+      <section className="relative z-10 mx-auto max-w-[1600px] px-5 pb-24 sm:px-6 lg:px-12">
+        <div className="mb-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">
+            Platform Intelligence
+          </p>
+
+          <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+            Everything your business needs.
+          </h2>
+
+          <p className="mt-3 max-w-2xl text-slate-500">
+            AI automation, analytics and enterprise
+            security working together inside one
+            intelligent platform.
+          </p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {/* AI */}
+
+          <div className="group relative overflow-hidden rounded-3xl border border-cyan-400/20 bg-[#080d16]/80 p-7 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/50 hover:shadow-[0_20px_80px_rgba(0,200,255,0.15)]">
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-cyan-500/10 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/20" />
+
+            <div className="relative">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-2xl">
+                  ✦
+                </div>
+
+                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                  ONLINE
+                </span>
+              </div>
+
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">
+                AI Intelligence
+              </p>
+
+              <h3 className="text-2xl font-bold tracking-tight">
+                AI Assistant
+              </h3>
+
+              <p className="mt-3 leading-7 text-slate-400">
+                Intelligent AI agents that automate repetitive
+                business operations and assist your team 24/7.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5">
+                <span className="text-sm text-slate-500">
+                  24 AI Agents Active
+                </span>
+
+                <span className="text-cyan-400 transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* ANALYTICS */}
+
+          <div className="group relative overflow-hidden rounded-3xl border border-violet-400/20 bg-[#080d16]/80 p-7 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-violet-400/50 hover:shadow-[0_20px_80px_rgba(120,70,255,0.15)]">
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-violet-500/10 blur-3xl transition-all duration-500 group-hover:bg-violet-400/20" />
+
+            <div className="relative">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-400/30 bg-violet-400/10 text-2xl">
+                  ◈
+                </div>
+
+                <span className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-medium text-violet-300">
+                  LIVE
+                </span>
+              </div>
+
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-violet-400">
+                Business Intelligence
+              </p>
+
+              <h3 className="text-2xl font-bold tracking-tight">
+                Advanced Analytics
+              </h3>
+
+              <p className="mt-3 leading-7 text-slate-400">
+                Real-time business intelligence, revenue insights
+                and performance analytics in one powerful workspace.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5">
+                <span className="text-sm text-slate-500">
+                  Real-time Insights
+                </span>
+
+                <span className="text-violet-400 transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* SECURITY */}
+
+          <div className="group relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-[#080d16]/80 p-7 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-emerald-400/50 hover:shadow-[0_20px_80px_rgba(0,220,160,0.12)]">
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-emerald-500/10 blur-3xl transition-all duration-500 group-hover:bg-emerald-400/20" />
+
+            <div className="relative">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-400/10 text-2xl">
+                  ◇
+                </div>
+
+                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                  PROTECTED
+                </span>
+              </div>
+
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
+                Enterprise Security
+              </p>
+
+              <h3 className="text-2xl font-bold tracking-tight">
+                Cyber Security
+              </h3>
+
+              <p className="mt-3 leading-7 text-slate-400">
+                AI-powered monitoring, threat detection and security
+                intelligence designed to protect your business.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5">
+                <span className="text-sm text-slate-500">
+                  Security Score 98%
+                </span>
+
+                <span className="text-emerald-400 transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          ANIMATIONS
+      ====================================================== */}
+
+      <style jsx global>{`
+        @keyframes efficiencyGlow {
+      from {
+        transform: rotate(0deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(180deg) scale(1.08);
+      }
+
+      to {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes trustedFloat {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .efficiency-glow {
+      animation: efficiencyGlow 7s linear infinite;
+      transform-origin: center;
+    }
+
+    .trusted-bubble {
+      animation: trustedFloat 3s ease-in-out infinite;
+    }
+
+    .trusted-bubble:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .trusted-bubble:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .trusted-bubble:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes float {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(0, -12px, 0);
+          }
+        }
+
+        @keyframes floatDelayed {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(0, 12px, 0);
+          }
+        }
+
+        @keyframes progress {
+          0% {
+            transform: translateX(-100%);
+          }
+
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes drawLine {
+          0% {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+          }
+
+          100% {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 0;
+          }
+        }
+
+        @keyframes ringMove {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        .animate-float-delayed {
+          animation: floatDelayed 5s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        .animate-progress {
+          animation: progress 2s ease-out forwards;
+          transform-origin: left center;
+        }
+
+        .revenue-line {
+          animation: drawLine 2.5s ease-out forwards;
+        }
+
+        .animate-ring {
+          animation: ringMove 8s linear infinite;
+          transform-origin: center;
+          will-change: transform;
+        }
+
+        .animate-spin-slow {
+          animation: ringMove 7s linear infinite;
+          transform-origin: center;
+          will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-float,
+          .animate-float-delayed,
+          .animate-progress,
+          .revenue-line,
+          .animate-ring,
+          .animate-spin-slow {
+            animation: none !important;
+          }
+        }
+      `}</style>
+    </main>
+  );
+}
