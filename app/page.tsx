@@ -197,23 +197,43 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Trusted */}
+            {/* Trusted Stats */}
 
-            <div className="mt-12 flex items-center gap-5">
-              <div className="flex -space-x-2">
-                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-cyan-400 to-blue-500" />
+            <div className="mt-12 flex flex-wrap items-center gap-5">
+              <div className="flex flex-wrap gap-3">
+                
+                <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border-2 border-[#03050a] bg-gradient-to-br from-cyan-400 to-blue-600 shadow-lg shadow-cyan-500/20">
+                  <span className="text-sm font-black text-white">5K+</span>
+                  <span className="text-[7px] uppercase tracking-wider text-white/70">
+                    Clients
+                  </span>
+                </div>
 
-                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-violet-400 to-purple-600" />
+                <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border-2 border-[#03050a] bg-gradient-to-br from-violet-500 to-purple-700 shadow-lg shadow-violet-500/20">
+                  <span className="text-sm font-black text-white">98%</span>
+                  <span className="text-[7px] uppercase tracking-wider text-white/70">
+                    Security
+                  </span>
+                </div>
 
-                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-blue-400 to-cyan-500" />
+                <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border-2 border-[#03050a] bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg shadow-blue-500/20">
+                  <span className="text-sm font-black text-white">120%</span>
+                  <span className="text-[7px] uppercase tracking-wider text-white/70">
+                    Growth
+                  </span>
+                </div>
 
-                <span className="trusted-bubble h-9 w-9 rounded-full border-2 border-[#03050a] bg-gradient-to-br from-orange-400 to-pink-500" />
+                <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border-2 border-[#03050a] bg-gradient-to-br from-orange-400 to-pink-600 shadow-lg shadow-orange-500/20">
+                  <span className="text-sm font-black text-white">4.9★</span>
+                  <span className="text-[7px] uppercase tracking-wider text-white/70">
+                    Rating
+                  </span>
+                </div>
+
               </div>
 
-              <span className="text-sm text-slate-500">
-                <span className="ml-5 whitespace-nowrap text-sm font-semibold text-white">
-  Trusted by businesses building with AI
-</span>
+              <span className="text-sm font-semibold text-white">
+                Trusted by businesses building with AI
               </span>
             </div>
           </div>
