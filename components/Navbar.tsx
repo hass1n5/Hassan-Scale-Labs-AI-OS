@@ -7,6 +7,8 @@ export default function Navbar() {
     null
   );
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -257,15 +259,78 @@ export default function Navbar() {
             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
           </a>
 
-          {/* MOBILE */}
+          {/* MOBILE MENU BUTTON */}
           <button
             type="button"
-            aria-label="Open menu"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-white lg:hidden"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((current) => !current)}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-white transition-all duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/[0.08] lg:hidden"
           >
-            ☰
+            <span className="text-xl leading-none">
+              {mobileMenuOpen ? "×" : "☰"}
+            </span>
           </button>
         </div>
+        {/* MOBILE MENU */}
+        {mobileMenuOpen && (
+          <div className="absolute left-0 right-0 top-[82px] rounded-2xl border border-white/10 bg-[#070a10]/[0.98] p-3 shadow-[0_30px_100px_rgba(0,0,0,0.75)] backdrop-blur-2xl lg:hidden">
+            <div className="flex flex-col gap-1">
+              {[
+                ["Home", "/"],
+                ["Services", "#services"],
+                ["AI Tools", "#ai-tools"],
+                ["Pricing", "#pricing"],
+                ["About", "#about"],
+                ["Contact", "#contact"],
+              ].map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-xl px-4 py-3 font-[family-name:var(--font-nav)] text-sm font-medium text-white/80 transition-all duration-200 hover:bg-white/[0.06] hover:text-cyan-300"
+                >
+                  {label}
+                </a>
+              ))}
+
+              <div className="my-2 h-px bg-white/[0.08]" />
+
+              <button
+                type="button"
+                onClick={() => {
+                  toggleMenu("platform");
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-between rounded-xl px-4 py-3 text-left font-[family-name:var(--font-nav)] text-sm font-medium text-white/80 transition-all duration-200 hover:bg-white/[0.06] hover:text-cyan-300"
+              >
+                <span>Platform</span>
+                <span>→</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  toggleMenu("solutions");
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-between rounded-xl px-4 py-3 text-left font-[family-name:var(--font-nav)] text-sm font-medium text-white/80 transition-all duration-200 hover:bg-white/[0.06] hover:text-cyan-300"
+              >
+                <span>Solutions</span>
+                <span>→</span>
+              </button>
+
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-1 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-600 px-4 py-3 text-center font-[family-name:var(--font-nav)] text-sm font-semibold text-white"
+              >
+                Get Started →
+              </a>
+            </div>
+          </div>
+        )}
+
       </nav>
     </header>
   );
