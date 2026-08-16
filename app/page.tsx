@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import PlatformSection from "@/components/PlatformSection";
 import HowItWorks from "@/components/HowItWorks";
+import WorkflowAutomation from "@/components/WorkflowAutomation";
 
 function useCountUp(
   target: number,
@@ -693,6 +694,8 @@ export default function Home() {
       ====================================================== */}
 
       <HowItWorks />
+
+      <WorkflowAutomation />
 
       <PlatformSection />
 
