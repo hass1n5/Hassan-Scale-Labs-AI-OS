@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import HowItWorks from "@/components/HowItWorks";
 
 function useCountUp(
   target: number,
@@ -685,6 +686,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* =====================================================
+          HOW IT WORKS
+      ====================================================== */}
+
+      <HowItWorks />
 
       {/* =====================================================
           ANIMATIONS
