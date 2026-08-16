@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import PlatformSection from "@/components/PlatformSection";
 import HowItWorks from "@/components/HowItWorks";
 
 function useCountUp(
@@ -692,6 +693,8 @@ export default function Home() {
       ====================================================== */}
 
       <HowItWorks />
+
+      <PlatformSection />
 
       {/* =====================================================
           ANIMATIONS
