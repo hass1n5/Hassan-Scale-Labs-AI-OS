@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import PlatformSection from "@/components/PlatformSection";
 import WhyScaleLabs from "@/components/WhyScaleLabs";
+import FinalCTA from "@/components/FinalCTA";
+import SiteFooter from "@/components/SiteFooter";
 import HowItWorks from "@/components/HowItWorks";
 import WorkflowAutomation from "@/components/WorkflowAutomation";
 import AIIntelligence from "@/components/AIIntelligence";
@@ -704,6 +706,10 @@ export default function Home() {
       <PlatformSection />
 
       <WhyScaleLabs />
+
+      <FinalCTA />
+
+      <SiteFooter />
 
       {/* =====================================================
           ANIMATIONS
