@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import PlatformSection from "@/components/PlatformSection";
+import WhyScaleLabs from "@/components/WhyScaleLabs";
 import HowItWorks from "@/components/HowItWorks";
 import WorkflowAutomation from "@/components/WorkflowAutomation";
+import AIIntelligence from "@/components/AIIntelligence";
 
 function useCountUp(
   target: number,
@@ -697,7 +699,11 @@ export default function Home() {
 
       <WorkflowAutomation />
 
+      <AIIntelligence />
+
       <PlatformSection />
+
+      <WhyScaleLabs />
 
       {/* =====================================================
           ANIMATIONS
